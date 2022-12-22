@@ -297,6 +297,7 @@ const CollectionTypeFormWrapper = ({ allLayoutData, children, slug, id, origin }
   );
 
   const onDraftRelationCheck = useCallback(async () => {
+    const { get: getClient } = getFetchClient();
     try {
       trackUsageRef.current('willCheckDraftRelations');
 
@@ -305,7 +306,7 @@ const CollectionTypeFormWrapper = ({ allLayoutData, children, slug, id, origin }
       );
       dispatch(setStatus('draft-relation-check-pending'));
 
-      const numberOfDraftRelations = await axiosInstance.get(endPoint);
+      const numberOfDraftRelations = await getClient(endPoint);
       trackUsageRef.current('didCheckDraftRelations');
 
       dispatch(setStatus('resolved'));
