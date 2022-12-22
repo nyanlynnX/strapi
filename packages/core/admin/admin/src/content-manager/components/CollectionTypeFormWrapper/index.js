@@ -32,6 +32,7 @@ import {
   submitSucceeded,
 } from '../../sharedReducers/crudReducer/actions';
 import selectCrudReducer from '../../sharedReducers/crudReducer/selectors';
+import { getFetchClient } from '../../../utils/getFetchClient';
 
 // This container is used to handle the CRUD
 const CollectionTypeFormWrapper = ({ allLayoutData, children, slug, id, origin }) => {
@@ -135,9 +136,10 @@ const CollectionTypeFormWrapper = ({ allLayoutData, children, slug, id, origin }
 
     const fetchData = async (source) => {
       dispatch(getData());
+      const { get: getClient } = getFetchClient();
 
       try {
-        const { data } = await axiosInstance.get(requestURL, { cancelToken: source.token });
+        const { data } = await getClient(requestURL, { cancelToken: source.token });
 
         dispatch(getDataSucceeded(cleanReceivedData(cleanClonedData(data))));
       } catch (err) {
