@@ -218,12 +218,11 @@ const CollectionTypeFormWrapper = ({ allLayoutData, children, slug, id, origin }
 
   const onDelete = useCallback(
     async (trackerProperty) => {
+      const { del } = getFetchClient();
       try {
         trackUsageRef.current('willDeleteEntry', trackerProperty);
 
-        const { data } = await axiosInstance.delete(
-          getRequestUrl(`collection-types/${slug}/${id}`)
-        );
+        const { data } = await del(getRequestUrl(`collection-types/${slug}/${id}`));
 
         toggleNotification({
           type: 'success',
