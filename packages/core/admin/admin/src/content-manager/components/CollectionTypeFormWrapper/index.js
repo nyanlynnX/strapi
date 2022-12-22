@@ -248,12 +248,13 @@ const CollectionTypeFormWrapper = ({ allLayoutData, children, slug, id, origin }
   const onPost = useCallback(
     async (body, trackerProperty) => {
       const endPoint = `${getRequestUrl(`collection-types/${slug}`)}${rawQuery}`;
+      const { post } = getFetchClient();
 
       try {
         // Show a loading button in the EditView/Header.js && lock the app => no navigation
         dispatch(setStatus('submit-pending'));
 
-        const { data } = await axiosInstance.post(endPoint, body);
+        const { data } = await post(endPoint, body);
 
         trackUsageRef.current('didCreateEntry', trackerProperty);
         toggleNotification({
