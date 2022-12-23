@@ -293,6 +293,7 @@ const SingleTypeFormWrapper = ({ allLayoutData, children, slug }) => {
 
   const onPut = useCallback(
     async (body, trackerProperty) => {
+      const { put } = getFetchClient();
       const endPoint = getRequestUrl(`${slug}${rawQuery}`);
 
       try {
@@ -300,7 +301,7 @@ const SingleTypeFormWrapper = ({ allLayoutData, children, slug }) => {
 
         dispatch(setStatus('submit-pending'));
 
-        const { data } = await axiosInstance.put(endPoint, body);
+        const { data } = await put(endPoint, body);
 
         toggleNotification({
           type: 'success',
