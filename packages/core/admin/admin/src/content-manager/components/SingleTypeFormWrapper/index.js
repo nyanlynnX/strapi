@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { axiosInstance } from '../../../core/utils';
+import { getFetchClient } from '../../../utils/getFetchClient';
 import { createDefaultForm, getTrad, removePasswordFieldsFromData } from '../../utils';
 import {
   getData,
@@ -189,12 +190,13 @@ const SingleTypeFormWrapper = ({ allLayoutData, children, slug }) => {
 
   const onPost = useCallback(
     async (body, trackerProperty) => {
+      const { put } = getFetchClient();
       const endPoint = getRequestUrl(`${slug}${rawQuery}`);
 
       try {
         dispatch(setStatus('submit-pending'));
 
-        const { data } = await axiosInstance.put(endPoint, body);
+        const { data } = await put(endPoint, body);
 
         trackUsageRef.current('didCreateEntry', trackerProperty);
         toggleNotification({
