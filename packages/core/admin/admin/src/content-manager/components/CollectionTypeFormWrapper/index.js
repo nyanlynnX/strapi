@@ -351,6 +351,7 @@ const CollectionTypeFormWrapper = ({ allLayoutData, children, slug, id, origin }
 
   const onPut = useCallback(
     async (body, trackerProperty) => {
+      const { put } = getFetchClient();
       const endPoint = getRequestUrl(`collection-types/${slug}/${id}`);
 
       try {
@@ -358,7 +359,7 @@ const CollectionTypeFormWrapper = ({ allLayoutData, children, slug, id, origin }
 
         dispatch(setStatus('submit-pending'));
 
-        const { data } = await axiosInstance.put(endPoint, body);
+        const { data } = await put(endPoint, body);
 
         trackUsageRef.current('didEditEntry', { trackerProperty });
         toggleNotification({
