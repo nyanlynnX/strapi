@@ -14,7 +14,6 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import isEqual from 'react-fast-compare';
-import { axiosInstance } from '../../../core/utils';
 import {
   createDefaultForm,
   getTrad,
@@ -388,6 +387,7 @@ const CollectionTypeFormWrapper = ({ allLayoutData, children, slug, id, origin }
   );
 
   const onUnpublish = useCallback(async () => {
+    const { post } = getFetchClient();
     const endPoint = getRequestUrl(`collection-types/${slug}/${id}/actions/unpublish`);
 
     dispatch(setStatus('unpublish-pending'));
@@ -395,7 +395,7 @@ const CollectionTypeFormWrapper = ({ allLayoutData, children, slug, id, origin }
     try {
       trackUsageRef.current('willUnpublishEntry');
 
-      const { data } = await axiosInstance.post(endPoint);
+      const { data } = await post(endPoint);
 
       trackUsageRef.current('didUnpublishEntry');
       toggleNotification({
