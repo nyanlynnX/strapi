@@ -23,7 +23,7 @@ import { get } from 'lodash';
 import matchSorter from 'match-sorter';
 import { useIntl } from 'react-intl';
 import { useHistory } from 'react-router-dom';
-import { axiosInstance } from '../../../../../../../admin/src/core/utils';
+import { getFetchClient } from '../../../../../../../admin/src/utils/getFetchClient';
 import { useRolesList } from '../../../../../../../admin/src/hooks';
 import adminPermissions from '../../../../../../../admin/src/permissions';
 import EmptyRole from '../../../../../../../admin/src/pages/SettingsPage/pages/Roles/ListPage/components/EmptyRole';
@@ -72,13 +72,15 @@ const useRoleActions = ({ getData, canCreate, canDelete, canUpdate }) => {
     initialState
   );
 
+  const { post } = getFetchClient();
+
   const handleDeleteData = async () => {
     try {
       dispatch({
         type: 'ON_REMOVE_ROLES',
       });
 
-      await axiosInstance.post('/admin/roles/batch-delete', {
+      await post('/admin/roles/batch-delete', {
         ids: [roleToDelete],
       });
 
