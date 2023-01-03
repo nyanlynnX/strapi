@@ -162,7 +162,9 @@ function ListView({
   const handleConfirmDeleteAllData = useCallback(
     async (ids) => {
       try {
-        await axiosInstance.post(getRequestUrl(`collection-types/${slug}/actions/bulkDelete`), {
+        const { post } = getFetchClient();
+
+        await post(getRequestUrl(`collection-types/${slug}/actions/bulkDelete`), {
           ids,
         });
 
