@@ -13,7 +13,6 @@ const fetchData = async (search, notify) => {
 
 const deleteData = async (ids) => {
   const { post } = getFetchClient();
-  console.log('/admin/users/batch-delete');
 
   await post('/admin/users/batch-delete', { ids });
 };
