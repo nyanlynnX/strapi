@@ -1,9 +1,13 @@
 import { axiosInstance } from '../../../../../../core/utils';
+import { getFetchClient } from '../../../../../../utils/getFetchClient';
 
 const fetchData = async (search, notify) => {
+  const { get } = getFetchClient();
   const {
     data: { data },
-  } = await axiosInstance.get(`/admin/users${search}`);
+  } = await get(`/admin/users${search}`);
+
+  console.log(`/admin/users${search}`);
 
   notify();
 
