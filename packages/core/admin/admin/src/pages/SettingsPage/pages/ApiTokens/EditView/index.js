@@ -15,7 +15,6 @@ import { Formik } from 'formik';
 import { useRouteMatch, useHistory } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { formatAPIErrors } from '../../../../../utils';
-import { axiosInstance } from '../../../../../core/utils';
 import { useFetchClient } from '../../../../../hooks';
 import { schema } from './utils';
 import LoadingView from './components/LoadingView';
@@ -51,7 +50,7 @@ const ApiTokenCreateView = () => {
   const {
     params: { id },
   } = useRouteMatch('/settings/api-tokens/:id');
-  const { get, post } = useFetchClient();
+  const { get, post, put } = useFetchClient();
 
   const isCreating = id === 'create';
 
@@ -167,7 +166,7 @@ const ApiTokenCreateView = () => {
             lifespan: lifespanVal,
             permissions: body.type === 'custom' ? state.selectedActions : null,
           })
-        : await axiosInstance.put(`/admin/api-tokens/${id}`, {
+        : await put(`/admin/api-tokens/${id}`, {
             name: body.name,
             description: body.description,
             type: body.type,
