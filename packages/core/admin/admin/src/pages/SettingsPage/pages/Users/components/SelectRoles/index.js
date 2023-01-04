@@ -5,7 +5,7 @@ import { Select, Option } from '@strapi/design-system/Select';
 import { useQuery } from 'react-query';
 import styled, { keyframes } from 'styled-components';
 import LoadingIcon from '@strapi/icons/Loader';
-import { axiosInstance } from '../../../../../../core/utils';
+import { getFetchClient } from '../../../../../../utils/getFetchClient';
 
 const rotation = keyframes`
   from {
@@ -27,7 +27,9 @@ const Loader = () => (
 );
 
 const fetchData = async () => {
-  const { data } = await axiosInstance.get('/admin/roles');
+  console.log('fetchRoles');
+  const { get } = getFetchClient();
+  const { data } = await get('/admin/roles');
 
   return data.data;
 };
