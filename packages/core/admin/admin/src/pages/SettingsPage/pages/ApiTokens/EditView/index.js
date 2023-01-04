@@ -51,7 +51,7 @@ const ApiTokenCreateView = () => {
   const {
     params: { id },
   } = useRouteMatch('/settings/api-tokens/:id');
-  const { get } = useFetchClient();
+  const { get, post } = useFetchClient();
 
   const isCreating = id === 'create';
 
@@ -162,7 +162,7 @@ const ApiTokenCreateView = () => {
       const {
         data: { data: response },
       } = isCreating
-        ? await axiosInstance.post(`/admin/api-tokens`, {
+        ? await post(`/admin/api-tokens`, {
             ...body,
             lifespan: lifespanVal,
             permissions: body.type === 'custom' ? state.selectedActions : null,
