@@ -1,8 +1,10 @@
 import omit from 'lodash/omit';
 import { axiosInstance } from '../../../core/utils';
+import { getFetchClient } from '../../../utils/getFetchClient';
 
 const fetchUser = async () => {
-  const { data } = await axiosInstance.get('/admin/users/me');
+  const { get } = getFetchClient();
+  const { data } = await get('/admin/users/me');
 
   return data.data;
 };
