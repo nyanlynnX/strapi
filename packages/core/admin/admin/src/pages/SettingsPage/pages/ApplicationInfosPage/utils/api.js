@@ -1,4 +1,3 @@
-import { axiosInstance } from '../../../../../core/utils';
 import { getFetchClient } from '../../../../../utils/getFetchClient';
 import prefixAllUrls from './prefixAllUrls';
 
@@ -10,7 +9,8 @@ const fetchProjectSettings = async () => {
 };
 
 const postProjectSettings = async (body) => {
-  const { data } = await axiosInstance.post('/admin/project-settings', body);
+  const { post } = getFetchClient();
+  const { data } = await post('/admin/project-settings', body);
 
   return prefixAllUrls(data);
 };
