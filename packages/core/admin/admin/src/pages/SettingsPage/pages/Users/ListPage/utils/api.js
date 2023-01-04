@@ -1,4 +1,3 @@
-import { axiosInstance } from '../../../../../../core/utils';
 import { getFetchClient } from '../../../../../../utils/getFetchClient';
 
 const fetchData = async (search, notify) => {
@@ -7,15 +6,16 @@ const fetchData = async (search, notify) => {
     data: { data },
   } = await get(`/admin/users${search}`);
 
-  console.log(`/admin/users${search}`);
-
   notify();
 
   return data;
 };
 
 const deleteData = async (ids) => {
-  await axiosInstance.post('/admin/users/batch-delete', { ids });
+  const { post } = getFetchClient();
+  console.log('/admin/users/batch-delete');
+
+  await post('/admin/users/batch-delete', { ids });
 };
 
 export { deleteData, fetchData };
