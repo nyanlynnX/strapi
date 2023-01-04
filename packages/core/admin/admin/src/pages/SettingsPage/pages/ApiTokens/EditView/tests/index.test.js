@@ -5,7 +5,6 @@ import { Router, Route } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { lightTheme, darkTheme } from '@strapi/design-system';
-import { axiosInstance } from '../../../../../../core/utils';
 import Theme from '../../../../../../components/Theme';
 import ThemeToggleProvider from '../../../../../../components/ThemeToggleProvider';
 import EditView from '../index';
@@ -33,25 +32,6 @@ jest.mock('@strapi/helper-plugin', () => ({
     unlockApp: jest.fn(),
   })),
 }));
-
-jest.spyOn(axiosInstance, 'get').mockImplementation((path) => {
-  if (path === '/admin/content-api/permissions') {
-    return { data };
-  }
-
-  return {
-    data: {
-      data: {
-        id: '1',
-        name: 'My super token',
-        description: 'This describe my super token',
-        type: 'read-only',
-        createdAt: '2021-11-15T00:00:00.000Z',
-        permissions: [],
-      },
-    },
-  };
-});
 
 jest.mock('../../../../../../hooks', () => ({
   ...jest.requireActual('../../../../../../hooks'),

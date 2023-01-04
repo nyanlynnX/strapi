@@ -114,7 +114,7 @@ const ApiTokenCreateView = () => {
     async () => {
       const {
         data: { data },
-      } = await axiosInstance.get(`/admin/api-tokens/${id}`);
+      } = await get(`/admin/api-tokens/${id}`);
 
       setApiToken({
         ...data,
