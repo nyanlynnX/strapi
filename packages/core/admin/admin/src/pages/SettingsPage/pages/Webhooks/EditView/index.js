@@ -15,8 +15,7 @@ import {
 import { Main } from '@strapi/design-system/Main';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { useHistory, useRouteMatch } from 'react-router-dom';
-import { useModels } from '../../../../../hooks';
-import { axiosInstance } from '../../../../../core/utils';
+import { useModels, useFetchClient } from '../../../../../hooks';
 import WebhookForm from './components/WebhookForm';
 import cleanData from './utils/formatData';
 
@@ -30,6 +29,7 @@ const EditView = () => {
   const toggleNotification = useNotification();
   const queryClient = useQueryClient();
   const { isLoading: isLoadingForModels, collectionTypes } = useModels();
+  const { post } = useFetchClient();
 
   const isCreating = id === 'create';
 
@@ -64,7 +64,7 @@ const EditView = () => {
     data: triggerResponse,
     isIdle: isTriggerIdle,
     mutate,
-  } = useMutation(() => axiosInstance.post(`/admin/webhooks/${id}/trigger`));
+  } = useMutation(() => post(`/admin/webhooks/${id}/trigger`));
 
   const triggerWebhook = () =>
     mutate(null, {
