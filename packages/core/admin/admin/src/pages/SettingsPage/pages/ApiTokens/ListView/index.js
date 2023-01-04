@@ -21,7 +21,6 @@ import { Main } from '@strapi/design-system/Main';
 import { Button } from '@strapi/design-system/Button';
 import Plus from '@strapi/icons/Plus';
 
-import { axiosInstance } from '../../../../../core/utils';
 import { useFetchClient } from '../../../../../hooks';
 import adminPermissions from '../../../../../permissions';
 import tableHeaders from './utils/tableHeaders';
@@ -39,7 +38,7 @@ const ApiTokenListView = () => {
   const { trackUsage } = useTracking();
   const { startSection } = useGuidedTour();
   const startSectionRef = useRef(startSection);
-  const { get } = useFetchClient();
+  const { get, del } = useFetchClient();
 
   useEffect(() => {
     if (startSectionRef.current) {
@@ -92,7 +91,7 @@ const ApiTokenListView = () => {
 
   const deleteMutation = useMutation(
     async (id) => {
-      await axiosInstance.delete(`/admin/api-tokens/${id}`);
+      await del(`/admin/api-tokens/${id}`);
     },
     {
       async onSuccess() {
