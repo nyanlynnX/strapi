@@ -41,7 +41,6 @@ const ModalForm = ({ queryName, onToggle }) => {
     },
     {
       async onSuccess({ data }) {
-        console.log('/admin/users');
         setRegistrationToken(data.data.registrationToken);
         await queryClient.invalidateQueries(queryName);
         goNext();

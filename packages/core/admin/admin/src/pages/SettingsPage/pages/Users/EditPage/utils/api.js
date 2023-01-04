@@ -1,7 +1,9 @@
 import { axiosInstance } from '../../../../../../core/utils';
+import { getFetchClient } from '../../../../../../utils/getFetchClient';
 
 const fetchUser = async (id) => {
-  const { data } = await axiosInstance.get(`/admin/users/${id}`);
+  const { get } = getFetchClient();
+  const { data } = await get(`/admin/users/${id}`);
 
   return data.data;
 };
