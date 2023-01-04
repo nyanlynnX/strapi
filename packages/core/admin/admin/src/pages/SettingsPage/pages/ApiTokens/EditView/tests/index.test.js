@@ -52,6 +52,31 @@ jest.spyOn(axiosInstance, 'get').mockImplementation((path) => {
     },
   };
 });
+
+jest.mock('../../../../../../hooks', () => ({
+  ...jest.requireActual('../../../../../../hooks'),
+  useFetchClient: jest.fn().mockReturnValue({
+    get: jest.fn().mockImplementation((path) => {
+      if (path === '/admin/content-api/permissions') {
+        return { data };
+      }
+
+      return {
+        data: {
+          data: {
+            id: '1',
+            name: 'My super token',
+            description: 'This describe my super token',
+            type: 'read-only',
+            createdAt: '2021-11-15T00:00:00.000Z',
+            permissions: [],
+          },
+        },
+      };
+    }),
+  }),
+}));
+
 jest.spyOn(Date, 'now').mockImplementation(() => new Date('2015-10-01T08:00:00.000Z'));
 
 const client = new QueryClient({

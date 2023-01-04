@@ -16,6 +16,7 @@ import { useRouteMatch, useHistory } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { formatAPIErrors } from '../../../../../utils';
 import { axiosInstance } from '../../../../../core/utils';
+import { useFetchClient } from '../../../../../hooks';
 import { schema } from './utils';
 import LoadingView from './components/LoadingView';
 import FormHead from './components/FormHead';
@@ -50,6 +51,7 @@ const ApiTokenCreateView = () => {
   const {
     params: { id },
   } = useRouteMatch('/settings/api-tokens/:id');
+  const { get } = useFetchClient();
 
   const isCreating = id === 'create';
 
@@ -58,7 +60,7 @@ const ApiTokenCreateView = () => {
     async () => {
       const [permissions, routes] = await Promise.all(
         ['/admin/content-api/permissions', '/admin/content-api/routes'].map(async (url) => {
-          const { data } = await axiosInstance.get(url);
+          const { data } = await get(url);
 
           return data.data;
         })
