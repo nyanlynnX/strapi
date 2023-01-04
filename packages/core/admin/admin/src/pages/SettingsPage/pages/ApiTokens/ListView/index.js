@@ -22,6 +22,7 @@ import { Button } from '@strapi/design-system/Button';
 import Plus from '@strapi/icons/Plus';
 
 import { axiosInstance } from '../../../../../core/utils';
+import { useFetchClient } from '../../../../../hooks';
 import adminPermissions from '../../../../../permissions';
 import tableHeaders from './utils/tableHeaders';
 import TableRows from './DynamicTable';
@@ -38,6 +39,7 @@ const ApiTokenListView = () => {
   const { trackUsage } = useTracking();
   const { startSection } = useGuidedTour();
   const startSectionRef = useRef(startSection);
+  const { get } = useFetchClient();
 
   useEffect(() => {
     if (startSectionRef.current) {
@@ -67,7 +69,7 @@ const ApiTokenListView = () => {
       trackUsage('willAccessTokenList');
       const {
         data: { data },
-      } = await axiosInstance.get(`/admin/api-tokens`);
+      } = await get(`/admin/api-tokens`);
 
       trackUsage('didAccessTokenList', { number: data.length });
 
