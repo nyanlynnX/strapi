@@ -1,4 +1,3 @@
-import { axiosInstance } from '../../../../../../core/utils';
 import { getFetchClient } from '../../../../../../utils/getFetchClient';
 
 const fetchUser = async (id) => {
@@ -9,7 +8,9 @@ const fetchUser = async (id) => {
 };
 
 const putUser = async (id, body) => {
-  const { data } = await axiosInstance.put(`/admin/users/${id}`, body);
+  const { put } = getFetchClient();
+
+  const { data } = await put(`/admin/users/${id}`, body);
 
   return data.data;
 };
