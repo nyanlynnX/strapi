@@ -1,7 +1,7 @@
 import { useEffect, useReducer, useCallback } from 'react';
 import { useNotification } from '@strapi/helper-plugin';
 import get from 'lodash/get';
-import { axiosInstance } from '../../core/utils';
+import { getFetchClient } from '../../utils/getFetchClient';
 import init from './init';
 import reducer, { initialState } from './reducer';
 
@@ -24,9 +24,11 @@ const useRolesList = (shouldFetchData = true) => {
         type: 'GET_DATA',
       });
 
+      const { get } = getFetchClient();
+
       const {
         data: { data },
-      } = await axiosInstance.get('/admin/roles');
+      } = await get('/admin/roles');
 
       dispatch({
         type: 'GET_DATA_SUCCEEDED',
