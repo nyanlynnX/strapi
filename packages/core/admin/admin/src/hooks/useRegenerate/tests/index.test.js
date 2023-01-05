@@ -1,18 +1,22 @@
 import { renderHook } from '@testing-library/react-hooks';
-import { axiosInstance } from '../../../core/utils';
 import useRegenerate from '../index';
-
-jest.spyOn(axiosInstance, 'get').mockResolvedValue({
-  data: {
-    data: {
-      accessKey: 'this is my new access key',
-    },
-  },
-});
 
 jest.mock('@strapi/helper-plugin', () => ({
   ...jest.requireActual('@strapi/helper-plugin'),
   useNotification: jest.fn(),
+}));
+
+jest.mock('../../../utils/getFetchClient', () => ({
+  ...jest.requireActual('../../../utils/getFetchClient'),
+  getFetchClient: jest.fn().mockReturnValue({
+    get: jest.fn().mockResolvedValue({
+      data: {
+        data: {
+          accessKey: 'this is my new access key',
+        },
+      },
+    }),
+  }),
 }));
 
 describe('useRegenerate', () => {
