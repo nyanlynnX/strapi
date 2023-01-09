@@ -106,14 +106,14 @@ function ListView({
   const fetchData = useCallback(
     async (endPoint, source) => {
       getData();
-      const { get: getClient } = getFetchClient();
+      const fetchClient = getFetchClient();
 
       try {
         const opts = source ? { cancelToken: source.token } : null;
 
         const {
           data: { results, pagination: paginationResult },
-        } = await getClient(endPoint, opts);
+        } = await fetchClient.get(endPoint, opts);
 
         notifyStatus(
           formatMessage(

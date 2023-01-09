@@ -12,17 +12,18 @@ import styled from 'styled-components';
 import { useNotifyAT } from '@strapi/design-system/LiveRegions';
 import { stopPropagation } from '@strapi/helper-plugin';
 import CellValue from '../CellValue';
-import { axiosInstance } from '../../../../../core/utils';
 import { getRequestUrl, getTrad } from '../../../../utils';
+import { getFetchClient } from '../../../../../utils/getFetchClient';
 
 const TypographyMaxWidth = styled(Typography)`
   max-width: 500px;
 `;
 
 const fetchRelation = async (endPoint, notifyStatus) => {
+  const { get } = getFetchClient();
   const {
     data: { results, pagination },
-  } = await axiosInstance.get(endPoint);
+  } = await get(endPoint);
 
   notifyStatus();
 

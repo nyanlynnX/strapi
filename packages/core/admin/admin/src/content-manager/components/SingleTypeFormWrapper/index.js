@@ -102,10 +102,10 @@ const SingleTypeFormWrapper = ({ allLayoutData, children, slug }) => {
 
       setIsCreatingEntry(true);
 
-      const { get: getClient } = getFetchClient();
+      const fetchClient = getFetchClient();
 
       try {
-        const { data } = await getClient(getRequestUrl(`${slug}${searchToSend}`), {
+        const { data } = await fetchClient.get(getRequestUrl(`${slug}${searchToSend}`), {
           cancelToken: source.token,
         });
 
@@ -240,14 +240,14 @@ const SingleTypeFormWrapper = ({ allLayoutData, children, slug }) => {
   );
 
   const onDraftRelationCheck = useCallback(async () => {
-    const { get: getClient } = getFetchClient();
+    const fetchClient = getFetchClient();
     try {
       trackUsageRef.current('willCheckDraftRelations');
 
       const endPoint = getRequestUrl(`${slug}/actions/numberOfDraftRelations`);
       dispatch(setStatus('draft-relation-check-pending'));
 
-      const numberOfDraftRelations = await getClient(endPoint);
+      const numberOfDraftRelations = await fetchClient.get(endPoint);
       trackUsageRef.current('didCheckDraftRelations');
 
       dispatch(setStatus('resolved'));

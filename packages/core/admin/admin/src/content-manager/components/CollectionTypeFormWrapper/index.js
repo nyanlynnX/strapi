@@ -135,10 +135,10 @@ const CollectionTypeFormWrapper = ({ allLayoutData, children, slug, id, origin }
 
     const fetchData = async (source) => {
       dispatch(getData());
-      const { get: getClient } = getFetchClient();
+      const fetchClient = getFetchClient();
 
       try {
-        const { data } = await getClient(requestURL, { cancelToken: source.token });
+        const { data } = await fetchClient.get(requestURL, { cancelToken: source.token });
 
         dispatch(getDataSucceeded(cleanReceivedData(cleanClonedData(data))));
       } catch (err) {
@@ -296,7 +296,7 @@ const CollectionTypeFormWrapper = ({ allLayoutData, children, slug, id, origin }
   );
 
   const onDraftRelationCheck = useCallback(async () => {
-    const { get: getClient } = getFetchClient();
+    const fetchClient = getFetchClient();
     try {
       trackUsageRef.current('willCheckDraftRelations');
 
@@ -305,7 +305,7 @@ const CollectionTypeFormWrapper = ({ allLayoutData, children, slug, id, origin }
       );
       dispatch(setStatus('draft-relation-check-pending'));
 
-      const numberOfDraftRelations = await getClient(endPoint);
+      const numberOfDraftRelations = await fetchClient.get(endPoint);
       trackUsageRef.current('didCheckDraftRelations');
 
       dispatch(setStatus('resolved'));
