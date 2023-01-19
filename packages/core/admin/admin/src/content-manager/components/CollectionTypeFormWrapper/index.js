@@ -10,6 +10,7 @@ import {
   formatContentTypeData,
   contentManagementUtilRemoveFieldsFromData,
   useGuidedTour,
+  getFetchClient,
 } from '@strapi/helper-plugin';
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -31,7 +32,6 @@ import {
   submitSucceeded,
 } from '../../sharedReducers/crudReducer/actions';
 import selectCrudReducer from '../../sharedReducers/crudReducer/selectors';
-import { getFetchClient } from '../../../utils/getFetchClient';
 
 // This container is used to handle the CRUD
 const CollectionTypeFormWrapper = ({ allLayoutData, children, slug, id, origin }) => {
