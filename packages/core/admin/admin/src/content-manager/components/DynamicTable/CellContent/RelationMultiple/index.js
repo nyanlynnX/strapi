@@ -10,10 +10,9 @@ import { SimpleMenu, MenuItem } from '@strapi/design-system/SimpleMenu';
 import { Loader } from '@strapi/design-system/Loader';
 import styled from 'styled-components';
 import { useNotifyAT } from '@strapi/design-system/LiveRegions';
-import { stopPropagation } from '@strapi/helper-plugin';
+import { stopPropagation, getFetchClient } from '@strapi/helper-plugin';
 import CellValue from '../CellValue';
 import { getRequestUrl, getTrad } from '../../../../utils';
-import { getFetchClient } from '../../../../../utils/getFetchClient';
 
 const TypographyMaxWidth = styled(Typography)`
   max-width: 500px;
@@ -66,6 +65,10 @@ const RelationMultiple = ({ fieldSchema, metadatas, name, entityId, value, conte
     {
       enabled: isOpen,
       staleTime: 0,
+      select: (data) => ({
+        ...data,
+        results: data.results.reverse(),
+      }),
     }
   );
 
