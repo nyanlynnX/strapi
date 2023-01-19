@@ -1,9 +1,8 @@
 import React, { memo, useEffect, useMemo, useReducer } from 'react';
 import { useParams } from 'react-router-dom';
-import { CheckPagePermissions, LoadingIndicatorPage } from '@strapi/helper-plugin';
+import { CheckPagePermissions, LoadingIndicatorPage, getFetchClient } from '@strapi/helper-plugin';
 import { useSelector, shallowEqual } from 'react-redux';
 import axios from 'axios';
-import { getFetchClient } from '../../../utils/getFetchClient';
 import { getRequestUrl, mergeMetasWithSchema } from '../../utils';
 import { makeSelectModelAndComponentSchemas } from '../App/selectors';
 import permissions from '../../../permissions';
