@@ -1,10 +1,14 @@
-import { useNotification, useRBACProvider, useStrapiApp } from '@strapi/helper-plugin';
+import {
+  useNotification,
+  useRBACProvider,
+  useStrapiApp,
+  getFetchClient,
+} from '@strapi/helper-plugin';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNotifyAT } from '@strapi/design-system/LiveRegions';
 import axios from 'axios';
 import { useIntl } from 'react-intl';
-import { getFetchClient } from '../../../utils/getFetchClient';
 import { MUTATE_COLLECTION_TYPES_LINKS, MUTATE_SINGLE_TYPES_LINKS } from '../../../exposedHooks';
 import { getRequestUrl, getTrad } from '../../utils';
 import { getData, resetProps, setContentTypeLinks } from './actions';
