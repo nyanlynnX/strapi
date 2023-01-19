@@ -1,6 +1,6 @@
 import axios from 'axios';
+import { getFetchClient } from '@strapi/helper-plugin';
 import checkLatestStrapiVersion from './checkLatestStrapiVersion';
-import { getFetchClient } from '../../../utils/getFetchClient';
 import packageJSON from '../../../../../package.json';
 
 const strapiVersion = packageJSON.version;
