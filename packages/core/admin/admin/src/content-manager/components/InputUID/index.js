@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { useCMEditViewDataManager } from '@strapi/helper-plugin';
+import { useCMEditViewDataManager, useFetchClient } from '@strapi/helper-plugin';
 import { useIntl } from 'react-intl';
 import get from 'lodash/get';
 import { TextInput } from '@strapi/design-system/TextInput';
@@ -9,7 +9,6 @@ import Refresh from '@strapi/icons/Refresh';
 import CheckCircle from '@strapi/icons/CheckCircle';
 import ExclamationMarkCircle from '@strapi/icons/ExclamationMarkCircle';
 import Loader from '@strapi/icons/Loader';
-import { useFetchClient } from '../../../hooks';
 import { getRequestUrl } from '../../utils';
 import useDebounce from './useDebounce';
 import UID_REGEX from './regex';

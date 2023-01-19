@@ -4,11 +4,11 @@ import { ThemeProvider, lightTheme } from '@strapi/design-system';
 import { IntlProvider } from 'react-intl';
 import { QueryClientProvider, QueryClient } from 'react-query';
 
-import { getFetchClient } from '../../../../../../utils/getFetchClient';
+import { getFetchClient } from '@strapi/helper-plugin';
 import RelationMultiple from '../index';
 
-jest.mock('../../../../../../utils/getFetchClient', () => ({
-  ...jest.requireActual('../../../../../../utils/getFetchClient'),
+jest.mock('@strapi/helper-plugin', () => ({
+  ...jest.requireActual('@strapi/helper-plugin'),
   getFetchClient: jest.fn().mockReturnValue({
     get: jest.fn().mockResolvedValue({
       data: {
