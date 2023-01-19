@@ -1,4 +1,4 @@
-import { getFetchClient } from '../../../../utils/getFetchClient';
+import { getFetchClient } from '@strapi/helper-plugin';
 import generateModelsLinks from './generateModelsLinks';
 import checkPermissions from './checkPermissions';
 import { getRequestUrl } from '../../../utils';
