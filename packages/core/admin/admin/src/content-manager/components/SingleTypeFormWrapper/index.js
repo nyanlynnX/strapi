@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 import get from 'lodash/get';
 import {
+  getFetchClient,
   useTracking,
   formatContentTypeData,
   useQueryParams,
@@ -12,7 +13,6 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { getFetchClient } from '../../../utils/getFetchClient';
 import { createDefaultForm, getTrad, removePasswordFieldsFromData } from '../../utils';
 import {
   getData,
