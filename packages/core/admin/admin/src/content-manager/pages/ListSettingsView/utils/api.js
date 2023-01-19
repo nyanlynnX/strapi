@@ -1,4 +1,4 @@
-import { getFetchClient } from '../../../../utils/getFetchClient';
+import { getFetchClient } from '@strapi/helper-plugin';
 import { getRequestUrl } from '../../../utils';
 
 const putCMSettingsLV = (body, slug) => {
